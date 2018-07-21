@@ -1,0 +1,23 @@
+<resources>
+    <dimen name="A">63dp</dimen>
+    <dimen name="B">56dp</dimen>
+    <dimen name="C">56dp</dimen>
+    <dimen name="D">63dp</dimen>
+    <dimen name="E">70dp</dimen>
+    <dimen name="F">70dp</dimen>
+    <dimen name="G">56dp</dimen>
+    <dimen name="H">70dp</dimen>
+    <dimen name="I">56dp</dimen>
+    <dimen name="J">70dp</dimen>
+    <dimen name="K">56dp</dimen>
+    <dimen name="L">70dp</dimen>
+    <dimen name="M">56dp</dimen>
+    <dimen name="N">70dp</dimen>
+    <dimen name="O">70dp</dimen>
+    <dimen name="P">70dp</dimen>
+    <dimen name="Q">70dp</dimen>
+    <dimen name="R">63dp</dimen>
+    <dimen name="S">56dp</dimen>
+    <dimen name="T">70dp</dimen>
+    <dimen name="U">70dp</dimen>
+</resources>

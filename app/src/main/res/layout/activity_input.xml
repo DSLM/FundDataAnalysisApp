@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.dslm.funddataanalysisapp.exceltable.input.InputActivity" android:orientation="vertical"
+        android:paddingLeft="30dp" android:paddingRight="30dp" android:paddingTop="20dp" android:paddingBottom="40dp">
+    
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="center"
+            android:layout_weight="1">
+        <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" android:text="基金:" android:textAlignment="viewEnd"
+                android:paddingRight="10dp"/>
+        <Spinner
+                android:layout_width="200dp"
+                android:layout_height="wrap_content" android:id="@+id/input_fund_picker" android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="center"
+            android:layout_weight="1">
+        <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" android:text="日期:" android:textAlignment="viewEnd"
+                android:paddingRight="10dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textAlignment="viewEnd" android:id="@+id/input_date_picker" android:inputType="none"
+                android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="center"
+            android:layout_weight="1">
+        <TextView
+                android:text="买入(元):"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number|numberSigned|numberDecimal"
+                android:ems="10"
+                android:textAlignment="viewEnd" android:id="@+id/input_column_F" android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="center"
+            android:layout_weight="1">
+        <TextView
+                android:text="买入手续费(元):"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number|numberSigned|numberDecimal"
+                android:ems="10"
+                android:textAlignment="viewEnd" android:id="@+id/input_column_G" android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="center"
+            android:layout_weight="1">
+        <TextView
+                android:text="卖出份额:"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number|numberSigned|numberDecimal"
+                android:ems="10"
+                android:textAlignment="viewEnd" android:id="@+id/input_column_J" android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="center"
+            android:layout_weight="1">
+        <TextView
+                android:text="卖出手续费(元):"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content" android:textAlignment="viewEnd" android:paddingRight="10dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number|numberSigned|numberDecimal"
+                android:ems="10"
+                android:textAlignment="viewEnd" android:id="@+id/input_column_K" android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>

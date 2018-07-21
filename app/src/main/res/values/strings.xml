@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">我的基金</string>
+    <string name="tab_fund_list_name">基金</string>
+    <string name="tab_setting_name">设置</string>
+    <string name="refresh_button">刷新</string>
+    <string name="add_record_button">添加基金交易记录</string>
+    <string name="add_fund_button">添加基金</string>
+    <string name="fund_code_text">基金代码</string>
+    <string name="cancel">取消</string>
+    <string name="add">添加</string>
+    <string name="check">确定</string>
+    <string name="to_top">回到顶部</string>
+</resources>

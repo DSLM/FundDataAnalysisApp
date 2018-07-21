@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/id_refresh_symbol"
+            android:icon="@drawable/ic_refresh_symbol"
+            app:showAsAction="always"
+            android:title="@string/refresh_button"/>
+    <item
+            android:id="@+id/id_add_record_symbol"
+            android:icon="@drawable/ic_add_record_symbol"
+            app:showAsAction="always"
+            android:title="@string/add_fund_button"/>
+    <item
+            android:id="@+id/id_add_symbol"
+            android:icon="@drawable/ic_add_symbol"
+            app:showAsAction="always"
+            android:title="@string/add_fund_button"/>
+</menu>
