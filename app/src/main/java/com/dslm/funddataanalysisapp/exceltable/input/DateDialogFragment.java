@@ -40,10 +40,6 @@ public class DateDialogFragment extends DialogFragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_time_picker, container, false);
         
         datePicker = view.findViewById(R.id.id_time_picker);
-        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
-        SimpleDateFormat monFormat = new SimpleDateFormat("MM");
-        SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
-        Date date = new Date(System.currentTimeMillis());
         datePicker.setMaxDate(System.currentTimeMillis());
     
         Button cancel = (Button)view.findViewById(R.id.date_cancel);

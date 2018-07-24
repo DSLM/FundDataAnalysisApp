@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#3fa9ff</color>
-    <color name="colorDefault">#FF000000</color>
+    <color name="colorDefault">#989baf</color>
+    <color name="colorSelected">#ffffff</color>
     <color name="colorLabel">#ffffff</color>
+    <color name="colorRipplePressed">#7c7204</color>
+    <color name="colorRippleBackground">#d2cd83</color>
+    <color name="colorGreen">#036901</color>
 </resources>

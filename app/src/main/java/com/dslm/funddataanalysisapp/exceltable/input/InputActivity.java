@@ -24,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class InputActivity extends AppCompatActivity implements DateSelectedListener
@@ -73,6 +75,8 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
     {
         datePicker = (EditText) findViewById(R.id.input_date_picker);
         datePicker.setInputType(InputType.TYPE_NULL);
+        SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+        datePicker.setText(sdf.format(new Date(System.currentTimeMillis())));
         datePicker.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -115,7 +119,6 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
             case R.id.id_check_button:
                 item.setEnabled(false);
                 
-                // TODO: 2018/7/15 加入数据
                 String code = String.valueOf(fundPicker.getSelectedItem()).substring(0, 6);
                 String date = datePicker.getText().toString();
                 HSSFWorkbook wb = new HSSFWorkbook();
@@ -126,7 +129,6 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
                 {
                     if (!historyDataFile.exists())
                     {
-                        // TODO: 2018/7/16 警告基金不存在
                         finish();
                     } else
                     {
@@ -195,6 +197,8 @@ public class InputActivity extends AppCompatActivity implements DateSelectedList
                         break;
                     }
                 }
+    
+                wb.getSheetAt(0).getRow(0).createCell(1).setCellValue(true);
                 
                 try
                 {

@@ -2,8 +2,9 @@ package com.dslm.funddataanalysisapp;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,22 @@ public class FundListRecyclerAdapter extends RecyclerView.Adapter
         customViewHolder.date.setText(fundData.getDate());
         customViewHolder.netWorthTrend.setText(String.valueOf(String.format("%.2f", fundData.getNetWorthTrend())));
         customViewHolder.equityReturn.setText(String.valueOf(String.format("%.2f%%", fundData.getEquityReturn())));
+    
+        if(fundData.getEquityReturn() < 0)
+        {
+            customViewHolder.netWorthTrend.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+            customViewHolder.equityReturn.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+        }
+        else if(fundData.getEquityReturn() > 0)
+        {
+            customViewHolder.netWorthTrend.setTextColor(Color.RED);
+            customViewHolder.equityReturn.setTextColor(Color.RED);
+        }
+        else
+        {
+            customViewHolder.netWorthTrend.setTextColor(Color.BLACK);
+            customViewHolder.equityReturn.setTextColor(Color.BLACK);
+        }
     
         if( mOnItemClickListener!= null)
         {

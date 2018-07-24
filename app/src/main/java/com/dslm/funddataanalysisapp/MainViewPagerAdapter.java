@@ -45,7 +45,7 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
     @Override
     public Object instantiateItem(ViewGroup container, int position)
     {
-            container.addView(viewList.get(position));
+        container.addView(viewList.get(position));
     
         if(viewList.get(position).findViewById(R.id.id_page_fund_list) != null)
         {
@@ -57,9 +57,9 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
             recyclerView.setLayoutManager(linearLayoutManager);
             recyclerView.setAdapter(recyclerAdapter);
-            System.out.println(recyclerAdapter.hashCode());
             
             sqLiteDatabase.close();
+            
             recyclerAdapter.setOnItemClickListener(new FundListRecyclerAdapter.OnItemClickListener() {
                 @Override
                 public void onClick(int position)
@@ -71,8 +71,8 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
                     MainActivity.context.startActivity(toExcelTable);
                 }
                 @Override
-                public void onLongClick(int position) {
-                    System.out.println("您长按点击了"+position+"行");
+                public void onLongClick(int position)
+                {
                 }
             });
         }
@@ -96,6 +96,7 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
+        //监听设置列表
         switch (position)
         {
             case 0:

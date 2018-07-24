@@ -6,16 +6,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.dslm.funddataanalysisapp.exceltable.ExcelTableActivity" android:orientation="vertical"
-android:divider="@drawable/divider_line_vertical2"
-android:showDividers="middle"
-        android:scrollbars="none">
+        android:divider="@drawable/divider_line_vertical2"
+        android:showDividers="middle"
+>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:gravity="left|center_vertical"
             android:divider="@drawable/divider_line_horizontal2"
             android:showDividers="middle"
-            android:scrollbars="none">
+            android:overScrollMode="never">
         <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" android:id="@+id/id_left_row_title" android:visibility="visible"
@@ -26,7 +26,7 @@ android:showDividers="middle"
                 android:layout_height="match_parent"
                 android:id="@+id/id_right_row_title"
                 android:layout_width="wrap_content"
-                android:scrollbars="none">
+                android:overScrollMode="never" android:scrollbars="none">
 
         </com.dslm.funddataanalysisapp.exceltable.DataHorizontalScrollView>
     </LinearLayout>
@@ -35,18 +35,21 @@ android:showDividers="middle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@drawable/divider_line_horizontal2"
-            android:showDividers="middle"
-            android:scrollbars="none">
+            android:showDividers="middle" android:scrollbars="vertical">
         <android.support.v7.widget.RecyclerView
                 android:layout_width="wrap_content"
-                android:id="@+id/id_excel_left_list" android:layout_height="match_parent"/>
+                android:id="@+id/id_excel_left_list" android:layout_height="match_parent"
+                android:overScrollMode="never" android:scrollbars="vertical"/>
     
         <com.dslm.funddataanalysisapp.exceltable.DataHorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/rows_right">
+                android:layout_height="match_parent" android:id="@+id/rows_right"
+                android:scrollbars="horizontal">
             <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/id_excel_right_list"/>
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_excel_right_list"
+            />
     
         </com.dslm.funddataanalysisapp.exceltable.DataHorizontalScrollView>
     </LinearLayout>

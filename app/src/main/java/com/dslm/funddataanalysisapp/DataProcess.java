@@ -218,6 +218,8 @@ public class DataProcess
     
         sheet.createRow(0).createCell(0).setCellValue(dates.size());
     
+        wb.getSheetAt(0).getRow(0).createCell(1).setCellValue(true);
+        
         try
         {
             FileOutputStream output = new FileOutputStream(historyDataFile);

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     
     public void viewPagerAndTabLayout()
     {
+        //初始化viewpager
         final ViewPager viewPager = (ViewPager)findViewById(R.id.id_view_pager);
         View firstView = getLayoutInflater().inflate(R.layout.page_fund_list, null);
         View secondView = getLayoutInflater().inflate(R.layout.page_setting, null);
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity
     }
     
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
+    public boolean onOptionsItemSelected(final MenuItem item)
     {
         switch (item.getItemId())
         {
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
                 return true;
             case R.id.id_refresh_symbol:
+                item.setEnabled(false);
                 SQLiteDatabase sqLiteDatabase = openHelper.getReadableDatabase();
                 FundDAO fundDAO = new FundDAO(sqLiteDatabase);
                 List<String> stringList = fundDAO.getCodeList();
@@ -147,6 +149,7 @@ public class MainActivity extends AppCompatActivity
                         switch (msg.what)
                         {
                             case HandlerWhatValue.refreshedData:
+                                item.setEnabled(true);
                                 Toast.makeText(MainActivity.context, "刷新完成", Toast.LENGTH_SHORT).show();
                                 MainViewPagerAdapter.recyclerAdapter.refreshData();
                                 break;

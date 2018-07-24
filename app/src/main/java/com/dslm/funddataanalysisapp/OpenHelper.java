@@ -16,7 +16,6 @@ public class OpenHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        // TODO: 2018/7/4 完善基金主页面显示列表信息 
         db.execSQL("Create Table If Not Exists fund_list (" +
                 "fund_order Integer primary key autoincrement," +
                 "fund_code varchar(255) not null," +

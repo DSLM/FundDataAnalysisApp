@@ -24,14 +24,13 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 
 public class ExcelTableActivity extends AppCompatActivity
 {
     private String code;
-    private RecyclerView leftRecyclerView;
-    private RecyclerView rightRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -44,21 +43,41 @@ public class ExcelTableActivity extends AppCompatActivity
         
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        Log.i("来了", "onCreate: ");
     
         HSSFWorkbook wb = new HSSFWorkbook();
         HSSFSheet sheet = wb.createSheet();
-        
+    
         try
         {
     
             File historyDataFile = new File(this.getFilesDir() + "/" + code + ".xls");
             if (historyDataFile.exists())
             {
+                // FIXME: 2018/7/23 读取速度慢
                 FileInputStream input = new FileInputStream(historyDataFile);
                 wb = new HSSFWorkbook(input);
                 input.close();
-                HSSFFormulaEvaluator.evaluateAllFormulaCells(wb);
+                if(wb.getSheetAt(0).getRow(0).getCell(1) == null)
+                {
+                    wb.getSheetAt(0).getRow(0).createCell(1).setCellValue(true);
+                }
+                if(wb.getSheetAt(0).getRow(0).getCell(1).getBooleanCellValue())
+                {
+                    HSSFFormulaEvaluator.evaluateAllFormulaCells(wb);
+                    wb.getSheetAt(0).getRow(0).createCell(1).setCellValue(false);
+                    try
+                    {
+                        FileOutputStream output = new FileOutputStream(historyDataFile);
+                        wb.write(output);
+                        output.flush();
+                        output.close();
+                    }
+                    catch(Exception e)
+                    {
+                        Log.e("写入基金excel问题", "ExcelTableActivity: ", e);
+                    }
+                }
+                System.out.println(System.currentTimeMillis());
                 sheet = wb.getSheetAt(0);
             }
         }
@@ -66,7 +85,6 @@ public class ExcelTableActivity extends AppCompatActivity
         {
             Log.e("读取基金excel问题", "ExcelTableActivity: ", e);
         }
-        
         
         leftPart(sheet);
         rightPart(sheet);
@@ -82,7 +100,7 @@ public class ExcelTableActivity extends AppCompatActivity
         layout.addView(getSpeRow((LinearLayout) getLayoutInflater().inflate(R.layout.title_row_view, null), leftOrder));
     
         RowRecyclerAdapter leftRowRecyclerAdapter = new RowRecyclerAdapter(sheet, leftOrder, this);
-        leftRecyclerView = (RecyclerView) findViewById(R.id.id_excel_left_list);
+        RecyclerView leftRecyclerView = (RecyclerView) findViewById(R.id.id_excel_left_list);
         leftRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         leftRecyclerView.setAdapter(leftRowRecyclerAdapter);
         DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -99,7 +117,7 @@ public class ExcelTableActivity extends AppCompatActivity
         layout.addView(getSpeRow((LinearLayout) getLayoutInflater().inflate(R.layout.title_row_view, null), rightOrder));
     
         RowRecyclerAdapter rightRowRecyclerAdapter = new RowRecyclerAdapter(sheet, rightOrder, this);
-        rightRecyclerView = (RecyclerView) findViewById(R.id.id_excel_right_list);
+        RecyclerView rightRecyclerView = (RecyclerView) findViewById(R.id.id_excel_right_list);
         rightRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         rightRecyclerView.setAdapter(rightRowRecyclerAdapter);
         DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -149,6 +167,9 @@ public class ExcelTableActivity extends AppCompatActivity
         titleScroll.setScrollView(dataScroll);
         dataScroll.setScrollView(titleScroll);
     
+        final RecyclerView leftRecyclerView = (RecyclerView) findViewById(R.id.id_excel_left_list);
+        final RecyclerView rightRecyclerView = (RecyclerView) findViewById(R.id.id_excel_right_list);
+        
         leftRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
         {
             @Override
@@ -178,6 +199,9 @@ public class ExcelTableActivity extends AppCompatActivity
                 finish();
                 return true;
             case R.id.id_to_top:
+                RecyclerView leftRecyclerView = (RecyclerView) findViewById(R.id.id_excel_left_list);
+                RecyclerView rightRecyclerView = (RecyclerView) findViewById(R.id.id_excel_right_list);
+    
                 leftRecyclerView.scrollToPosition(0);
                 rightRecyclerView.scrollToPosition(0);
                 return true;
