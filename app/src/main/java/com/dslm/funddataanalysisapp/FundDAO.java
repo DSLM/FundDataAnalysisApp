@@ -47,11 +47,53 @@ public class FundDAO
         return updateResult != 0;
     }
     
+    public boolean exchange(int fromPosition, int toPosition)
+    {
+        Cursor cursorF = database.query("fund_list", null,
+                "fund_order=?", new String[]{(fromPosition + 1) + ""}, null,
+                null, null, null);
+        ContentValues contentValueF = new ContentValues();
+        while (cursorF.moveToNext())
+        {
+            contentValueF.put("fund_code", cursorF.getString(1));
+            contentValueF.put("name", cursorF.getString(2));
+            contentValueF.put("newest_date", cursorF.getString(3));
+            contentValueF.put("net_worth_trend", cursorF.getDouble(4));
+            contentValueF.put("equity_return", cursorF.getDouble(5));
+        }
+        
+        Cursor cursorT = database.query("fund_list", null,
+                "fund_order=?", new String[]{(toPosition + 1) + ""}, null,
+                null, null, null);
+        ContentValues contentValueT = new ContentValues();
+        while (cursorT.moveToNext())
+        {
+            contentValueT.put("fund_code", cursorT.getString(1));
+            contentValueT.put("name", cursorT.getString(2));
+            contentValueT.put("newest_date", cursorT.getString(3));
+            contentValueT.put("net_worth_trend", cursorT.getDouble(4));
+            contentValueT.put("equity_return", cursorT.getDouble(5));
+        }
     
-    public SimpleFundData queryOne(SimpleFundData fundData)
+        database.update("fund_list", contentValueF,
+                "fund_order=?", new String[]{(toPosition + 1) + ""});
+        database.update("fund_list", contentValueT,
+                "fund_order=?", new String[]{(fromPosition + 1) + ""});
+        
+        return false;
+    }
+    
+    public boolean move(int fromPosition, int toPosition)
+    {
+        
+        return false;
+    }
+    
+    
+    public SimpleFundData existedName(SimpleFundData fundData)
     {
         Cursor cursor = database.query("fund_list", null,
-                "fund_code=?", new String[]{fundData.getCode() + ""}, null,
+                "fund_code=?", new String[]{fundData.getCode()}, null,
                 null, null, null);
         while (cursor.moveToNext())
         {

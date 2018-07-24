@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
     private List<View> viewList;
     public static RecyclerView recyclerView;
     public static FundListRecyclerAdapter recyclerAdapter;
+    public static ItemTouchHelper itemTouchHelper;
     
     public MainViewPagerAdapter(List<View> viewList)
     {
@@ -64,22 +66,64 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
                 @Override
                 public void onClick(int position)
                 {
-                    Intent toExcelTable = new Intent();
-                    toExcelTable.setClass(MainActivity.context, ExcelTableActivity.class);
-                    toExcelTable.putExtra("code", recyclerAdapter.getCode(position));
-                    toExcelTable.putExtra("name", recyclerAdapter.getName(position));
-                    MainActivity.context.startActivity(toExcelTable);
+                    if(!MainActivity.isDragging)
+                    {
+                        Intent toExcelTable = new Intent();
+                        toExcelTable.setClass(MainActivity.context, ExcelTableActivity.class);
+                        toExcelTable.putExtra("code", recyclerAdapter.getCode(position));
+                        toExcelTable.putExtra("name", recyclerAdapter.getName(position));
+                        MainActivity.context.startActivity(toExcelTable);
+                    }
                 }
                 @Override
                 public void onLongClick(int position)
                 {
+                
                 }
             });
+    
+            this.itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback()
+            {
+                @Override
+                public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
+                {
+                    return makeMovementFlags(ItemTouchHelper.UP|ItemTouchHelper.DOWN,0);
+                }
+    
+                @Override
+                public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder1)
+                {
+                    int fromPosition = viewHolder.getAdapterPosition();
+                    int toPosition = viewHolder1.getAdapterPosition();
+                    SQLiteDatabase sqLiteDatabase = openHelper.getReadableDatabase();
+                    FundDAO fundDAO = new FundDAO(sqLiteDatabase);
+                    
+                    fundDAO.exchange(fromPosition, toPosition);
+                    
+                    sqLiteDatabase.close();
+                    
+                    recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+                    return false;
+                }
+    
+                @Override
+                public void onSwiped(RecyclerView.ViewHolder viewHolder, int i)
+                {
+        
+                }
+    
+                @Override
+                public boolean isLongPressDragEnabled()
+                {
+                    return MainActivity.isDragging;
+                }
+            });
+            itemTouchHelper.attachToRecyclerView(recyclerView);
         }
         if(viewList.get(position).findViewById(R.id.id_setting_listview) != null)
         {
             ListView settingListView = (ListView)viewList.get(position).findViewById(R.id.id_setting_listview);
-            String [] list = {"删除"};
+            String [] list = {"删除", "修改统计表的列排序", "强制刷新"};
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                     MainActivity.context,
                     android.R.layout.simple_expandable_list_item_1,
@@ -96,13 +140,16 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        //监听设置列表
+        //监听"设置"列表
         switch (position)
         {
             case 0:
                 Intent toDelete = new Intent();
                 toDelete.setClass(MainActivity.context, DeleteActivity.class);
                 MainActivity.context.startActivity(toDelete);
+                break;
+            case 1:
+                
                 break;
         }
     }

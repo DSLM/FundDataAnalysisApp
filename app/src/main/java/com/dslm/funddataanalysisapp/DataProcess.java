@@ -2,7 +2,6 @@ package com.dslm.funddataanalysisapp;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 import org.apache.poi.hssf.usermodel.*;
@@ -97,7 +96,7 @@ public class DataProcess
     
         Message message = new Message();
         message.obj = fundData;
-        if(fundDAO.queryOne(fundData).getName() != null)
+        if(fundDAO.existedName(fundData).getName() != null)
         {
             fundDAO.update(fundData);
             sqLiteDatabase.close();

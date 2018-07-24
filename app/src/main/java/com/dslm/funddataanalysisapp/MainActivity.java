@@ -9,10 +9,7 @@ import android.os.*;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.Toast;
 import com.dslm.funddataanalysisapp.exceltable.input.InputActivity;
 
@@ -23,6 +20,7 @@ public class MainActivity extends AppCompatActivity
 {
     public static OpenHelper openHelper;
     public static Context context;
+    public static Boolean isDragging;
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -40,6 +38,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
     
         context = this;
+        isDragging = false;
         viewPagerAndTabLayout();
         data();
     }
@@ -169,6 +168,50 @@ public class MainActivity extends AppCompatActivity
                 Intent toAddRecord = new Intent();
                 toAddRecord.setClass(this, InputActivity.class);
                 startActivity(toAddRecord);
+                return true;
+            case R.id.id_drag_symbol:
+                isDragging = true;
+                startActionMode(new ActionMode.Callback()
+                {
+                    @Override
+                    public boolean onCreateActionMode(ActionMode mode, Menu menu)
+                    {
+                        MenuInflater inflater = getMenuInflater();
+                        inflater.inflate(R.menu.menu_check_button, menu);
+                        mode.setTitle("基金排序");
+                        return true;
+                    }
+    
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode mode, Menu menu)
+                    {
+                        return false;
+                    }
+    
+                    @Override
+                    public boolean onActionItemClicked(ActionMode mode, MenuItem item)
+                    {
+                        switch (item.getItemId())
+                        {
+                            case android.R.id.home:
+                                isDragging = false;
+                                mode.finish();
+                                return true;
+                            case R.id.id_check_button:
+                                isDragging = false;
+                                mode.finish();
+                                // TODO: 2018/7/24 此处刷新数据
+                                return true;
+                        }
+                        return false;
+                    }
+    
+                    @Override
+                    public void onDestroyActionMode(ActionMode mode)
+                    {
+        
+                    }
+                });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
