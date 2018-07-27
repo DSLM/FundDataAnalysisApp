@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.dslm.funddataanalysisapp.delete.DeleteActivity;
 import com.dslm.funddataanalysisapp.exceltable.ExcelTableActivity;
+import com.dslm.funddataanalysisapp.exceltable.column.ColumnOrderActivity;
 
 import java.util.List;
 
@@ -61,26 +62,6 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
             recyclerView.setAdapter(recyclerAdapter);
             
             sqLiteDatabase.close();
-            
-            recyclerAdapter.setOnItemClickListener(new FundListRecyclerAdapter.OnItemClickListener() {
-                @Override
-                public void onClick(int position)
-                {
-                    if(!MainActivity.isDragging)
-                    {
-                        Intent toExcelTable = new Intent();
-                        toExcelTable.setClass(MainActivity.context, ExcelTableActivity.class);
-                        toExcelTable.putExtra("code", recyclerAdapter.getCode(position));
-                        toExcelTable.putExtra("name", recyclerAdapter.getName(position));
-                        MainActivity.context.startActivity(toExcelTable);
-                    }
-                }
-                @Override
-                public void onLongClick(int position)
-                {
-                
-                }
-            });
     
             this.itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback()
             {
@@ -102,7 +83,8 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
                     
                     sqLiteDatabase.close();
                     
-                    recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+                    recyclerAdapter.exchange(fromPosition, toPosition);
+                    recyclerAdapter.notifyItemMoved(fromPosition, toPosition);
                     return false;
                 }
     
@@ -123,7 +105,7 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
         if(viewList.get(position).findViewById(R.id.id_setting_listview) != null)
         {
             ListView settingListView = (ListView)viewList.get(position).findViewById(R.id.id_setting_listview);
-            String [] list = {"删除", "修改统计表的列排序", "强制刷新"};
+            String [] list = {"删除基金", "修改统计表的列排序", "强制刷新"};
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                     MainActivity.context,
                     android.R.layout.simple_expandable_list_item_1,
@@ -149,15 +131,10 @@ public class MainViewPagerAdapter extends PagerAdapter implements OnItemClickLis
                 MainActivity.context.startActivity(toDelete);
                 break;
             case 1:
-                
+                Intent toOrder = new Intent();
+                toOrder.setClass(MainActivity.context, ColumnOrderActivity.class);
+                MainActivity.context.startActivity(toOrder);
                 break;
         }
-    }
-    
-    @Override
-    public void notifyDataSetChanged()
-    {
-        super.notifyDataSetChanged();
-        
     }
 }

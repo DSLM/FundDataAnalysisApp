@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     public static OpenHelper openHelper;
     public static Context context;
     public static Boolean isDragging;
+    public static ActionMode actionMode;
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -71,6 +72,10 @@ public class MainActivity extends AppCompatActivity
             public void onPageSelected(int i)
             {
                 tabLayout.getTabAt(i).select();
+                if(actionMode != null)
+                {
+                    actionMode.finish();
+                }
             }
         
             @Override
@@ -86,6 +91,10 @@ public class MainActivity extends AppCompatActivity
             public void onTabSelected(TabLayout.Tab tab)
             {
                 viewPager.setCurrentItem(tab.getPosition());
+                if(actionMode != null)
+                {
+                    actionMode.finish();
+                }
             }
         
             @Override
@@ -109,12 +118,19 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences sharedPreferences = getSharedPreferences("list", MODE_PRIVATE);
         String leftOrder = sharedPreferences.getString("left_order", "A");
         String rightOrder = sharedPreferences.getString("right_order", "BCDEFGHIJKLMNOPQRSTU");
+        String leftChooseOrder = sharedPreferences.getString("left_choose_order", "ABCDEFGHIJKLMNOPQRSTU");
+        String rightChooseOrder = sharedPreferences.getString("right_choose_order", "ABCDEFGHIJKLMNOPQRSTU");
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("left_order", leftOrder);
         editor.putString("right_order", rightOrder);
+        editor.putString("left_choose_order", leftChooseOrder);
+        editor.putString("right_choose_order", rightChooseOrder);
+        editor.commit();
+        // TODO: 2018/7/25 删了
         System.out.println(leftOrder);
         System.out.println(rightOrder);
-        editor.commit();
+        System.out.println(leftChooseOrder);
+        System.out.println(rightChooseOrder);
     }
     
     @Override
@@ -171,7 +187,7 @@ public class MainActivity extends AppCompatActivity
                 return true;
             case R.id.id_drag_symbol:
                 isDragging = true;
-                startActionMode(new ActionMode.Callback()
+                actionMode = startActionMode(new ActionMode.Callback()
                 {
                     @Override
                     public boolean onCreateActionMode(ActionMode mode, Menu menu)
@@ -209,7 +225,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onDestroyActionMode(ActionMode mode)
                     {
-        
+                        mode=null;
                     }
                 });
                 return true;

@@ -1,6 +1,7 @@
 package com.dslm.funddataanalysisapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -9,14 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.dslm.funddataanalysisapp.exceltable.ExcelTableActivity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FundListRecyclerAdapter extends RecyclerView.Adapter
 {
     private List<SimpleFundData> fundDataList;
     private Context context;
-    private OnItemClickListener mOnItemClickListener;
     
     public FundListRecyclerAdapter(List<SimpleFundData> fundDataList, Context context)
     {
@@ -34,10 +36,10 @@ public class FundListRecyclerAdapter extends RecyclerView.Adapter
     }
     
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i)
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i)
     {
         SimpleFundData fundData = fundDataList.get(i);
-        CustomViewHolder customViewHolder = (CustomViewHolder) viewHolder;
+        final CustomViewHolder customViewHolder = (CustomViewHolder) viewHolder;
         customViewHolder.name.setText(fundData.getName());
         customViewHolder.code.setText(fundData.getCode());
         customViewHolder.date.setText(fundData.getDate());
@@ -60,26 +62,29 @@ public class FundListRecyclerAdapter extends RecyclerView.Adapter
             customViewHolder.equityReturn.setTextColor(Color.BLACK);
         }
     
-        if( mOnItemClickListener!= null)
+        customViewHolder.itemView.setOnClickListener(new View.OnClickListener()
         {
-            customViewHolder.itemView.setOnClickListener( new View.OnClickListener()
+            @Override
+            public void onClick(View v)
             {
-                @Override
-                public void onClick(View v)
+                if(!MainActivity.isDragging)
                 {
-                    mOnItemClickListener.onClick(i);
+                    Intent toExcelTable = new Intent();
+                    toExcelTable.setClass(MainActivity.context, ExcelTableActivity.class);
+                    toExcelTable.putExtra("code", customViewHolder.code.getText());
+                    toExcelTable.putExtra("name", customViewHolder.name.getText());
+                    MainActivity.context.startActivity(toExcelTable);
                 }
-            });
-            customViewHolder.itemView.setOnLongClickListener( new View.OnLongClickListener()
+            }
+        });
+        customViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
             {
-                @Override
-                public boolean onLongClick(View v)
-                {
-                    mOnItemClickListener.onLongClick(i);
-                    return false;
-                }
-            });
-        }
+                return false;
+            }
+        });
     }
     
     @Override
@@ -132,11 +137,6 @@ public class FundListRecyclerAdapter extends RecyclerView.Adapter
         void onLongClick( int position);
     }
     
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener)
-    {
-        this.mOnItemClickListener = onItemClickListener;
-    }
-    
     public String getCode(int position)
     {
         return fundDataList.get(position).getCode();
@@ -146,5 +146,10 @@ public class FundListRecyclerAdapter extends RecyclerView.Adapter
     public String getName(int position)
     {
         return fundDataList.get(position).getName();
+    }
+    
+    public void exchange(int a, int b)
+    {
+        Collections.swap(fundDataList, a, b);
     }
 }

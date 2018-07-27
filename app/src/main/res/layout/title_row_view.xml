@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="@dimen/A"
-              android:layout_height="wrap_content"
+              android:layout_height="@dimen/height_of_title"
               android:divider="@drawable/divider_line_horizontal"
               android:showDividers="middle"
               android:gravity="center_horizontal"
@@ -11,147 +11,147 @@
     <TextView
             android:text="日期"
             android:layout_width="@dimen/A"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_A"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="净值(元)"
             android:layout_width="@dimen/B"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_B"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="累计净值"
             android:layout_width="@dimen/C"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_C"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="日涨幅"
             android:layout_width="@dimen/D"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_D"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="当日收益"
             android:layout_width="@dimen/E"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_E"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="买入(元)"
             android:layout_width="@dimen/F"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_F"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="买入手续费(元)"
             android:layout_width="@dimen/G"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_G"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="买入份额"
             android:layout_width="@dimen/H"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_H"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="买入成本单价"
             android:layout_width="@dimen/I"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_I"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="卖出份额"
             android:layout_width="@dimen/J"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_J"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="卖出手续费(元)"
             android:layout_width="@dimen/K"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_K"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="卖出(元)"
             android:layout_width="@dimen/L"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_L"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="卖出成本单价"
             android:layout_width="@dimen/M"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_M"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="本金(元)"
             android:layout_width="@dimen/N"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_N"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="持仓份额"
             android:layout_width="@dimen/O"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_O"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="持仓市值(元)"
             android:layout_width="@dimen/P"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_P"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="持仓收益(元)"
             android:layout_width="@dimen/Q"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_Q"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="持仓收益率"
             android:layout_width="@dimen/R"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_R"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="摊薄单价"
             android:layout_width="@dimen/S"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_S"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="总投入(元)"
             android:layout_width="@dimen/T"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_T"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>
     <TextView
             android:text="总赎回(元)"
             android:layout_width="@dimen/U"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_of_title"
             android:id="@+id/data_U"
             android:visibility="gone"
             style="@style/TitleTextStyle"/>

@@ -20,4 +20,5 @@
     <dimen name="S">56dp</dimen>
     <dimen name="T">70dp</dimen>
     <dimen name="U">70dp</dimen>
+    <dimen name="height_of_title">36dp</dimen>
 </resources>

@@ -12,6 +12,8 @@ import com.dslm.funddataanalysisapp.R;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 
+import java.text.DecimalFormat;
+
 
 /**
  * Created by Administrator on 2018/7/14.
@@ -93,7 +95,19 @@ public class RowRecyclerAdapter extends RecyclerView.Adapter
                         case 1:
                         case 2:
                         case 18:
-                            data = String.format("%.4f", row.getCell(order.charAt(j) - 'A').getNumericCellValue());
+                            if(String.valueOf(row.getCell(order.charAt(j) - 'A').getNumericCellValue()).contains("E"))
+                            {
+                                // FIXME: 2018/7/27 治标不治本
+                                data = String.format("%.4f",
+                                        Double.valueOf(String.valueOf(
+                                                row.getCell(order.charAt(j) - 'A').getNumericCellValue())
+                                                .substring(0,
+                                                String.valueOf(row.getCell(order.charAt(j) - 'A')).indexOf('E'))));
+                            }
+                            else
+                            {
+                                data = String.format("%.4f", row.getCell(order.charAt(j) - 'A').getNumericCellValue());
+                            }
                             break;
                         case 8:
                         case 12:

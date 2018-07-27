@@ -24,15 +24,20 @@
         </activity>
         <activity
                 android:name=".exceltable.ExcelTableActivity"
-                android:launchMode="singleTop"
-                android:configChanges="orientation|screenSize">
+                android:configChanges="orientation|screenSize"
+                android:launchMode="singleTop">
         </activity>
         <activity
                 android:name=".exceltable.input.InputActivity"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".delete.DeleteActivity"
+        <activity
+                android:name=".delete.DeleteActivity"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".exceltable.column.ColumnOrderActivity"
                   android:launchMode="singleTop"
                   android:screenOrientation="portrait">
         </activity>
