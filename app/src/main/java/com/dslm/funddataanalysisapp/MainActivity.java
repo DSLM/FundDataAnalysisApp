@@ -225,7 +225,8 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onDestroyActionMode(ActionMode mode)
                     {
-                        mode=null;
+                        mode = null;
+                        isDragging = false;
                     }
                 });
                 return true;
