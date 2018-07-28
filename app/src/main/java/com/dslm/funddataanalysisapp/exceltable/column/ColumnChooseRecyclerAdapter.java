@@ -14,10 +14,6 @@ import java.util.*;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Administrator on 2018/7/25.
- */
-
 public class ColumnChooseRecyclerAdapter extends RecyclerView.Adapter
 {
     private List<String> colList = new ArrayList<>();//独有
@@ -104,7 +100,7 @@ public class ColumnChooseRecyclerAdapter extends RecyclerView.Adapter
             public void onClick(View v)
             {
                 checkedTextView.setChecked(!checkedTextView.isChecked());
-                checkList.set(nameToChar.get(checkedTextView.getText()) - 'A', checkedTextView.isChecked());
+                checkList.set(colList.indexOf(checkedTextView.getText()), checkedTextView.isChecked());
             }
         });
     }
@@ -133,8 +129,7 @@ public class ColumnChooseRecyclerAdapter extends RecyclerView.Adapter
         for(int i = 0;  i < colList.size(); i++)
         {
             chooseOrder += nameToChar.get(colList.get(i));
-            if(checkList.get(i))
-                order += nameToChar.get(colList.get(i));
+            order += checkList.get(i) ? nameToChar.get(colList.get(i)) : "";
         }
         SharedPreferences.Editor editor = context.getSharedPreferences("list", MODE_PRIVATE).edit();
     

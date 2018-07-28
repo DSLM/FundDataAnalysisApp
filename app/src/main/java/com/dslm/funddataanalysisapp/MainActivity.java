@@ -126,11 +126,6 @@ public class MainActivity extends AppCompatActivity
         editor.putString("left_choose_order", leftChooseOrder);
         editor.putString("right_choose_order", rightChooseOrder);
         editor.commit();
-        // TODO: 2018/7/25 删了
-        System.out.println(leftOrder);
-        System.out.println(rightOrder);
-        System.out.println(leftChooseOrder);
-        System.out.println(rightChooseOrder);
     }
     
     @Override
